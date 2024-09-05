@@ -1,17 +1,81 @@
 {
-    "welcome" : "Welcome to Calculator!",
-    "asks" : {
-        "numbers" : ["What's the first number?", "What's the second number?"],
-        "operations" : "What operation would you like to perform?\n 1) Add 2) Subtract 3) Multiple 4) Divide",
-        "repeat" : "Perform another operation? Y / N"
+    "lang_select" : "Select language / Selecciona el idioma / Sélectionnez la langue / Sprache auswählen: \nEN / ES / FR / DE",
+
+    "EN": {
+        "welcome": "Welcome to Calculator!",
+        "ask": {
+            "number": ["What's the first number?", "What's the second number?"],
+            "operation": "What operation would you like to perform?\n 1) Add 2) Subtract 3) Multiply 4) Divide",
+            "repeat": "Perform another operation? Y / N"
+        },
+        "scold": {
+            "wrong_number": "Hmm.. That doesn't look like a valid number.",
+            "wrong_operation": "You must enter 1, 2, 3, or 4.",
+            "wrong_continue": "You must enter 'Y' or 'N'."
+        },
+        "letter": ["Y", "N"],
+        "confirmation": {
+            "yes": "Once more into the breach.",
+            "no": "Thanks for operating!"
+        },
+        "result": "The result is: "
     },
-    "scolds" : {
-        "wrong_number" : "Hmm.. That doesn't look like a valid number.", 
-        "wrong_operation" : "You must enter 1, 2, 3, or 4.", 
-        "wrong_continue" : "You must enter 'Y' or 'N'."
+    "ES": {
+        "welcome": "¡Bienvenido a la Calculadora!",
+        "ask": {
+            "number": ["¿Cuál es el primer número?", "¿Cuál es el segundo número?"],
+            "operation": "¿Qué operación te gustaría realizar?\n 1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
+            "repeat": "¿Realizar otra operación? S / N"
+        },
+        "scold": {
+            "wrong_number": "Hmm.. Eso no parece un número válido.",
+            "wrong_operation": "Debes ingresar 1, 2, 3, o 4.",
+            "wrong_continue": "Debes ingresar 'S' o 'N'."
+        },
+        "letter": ["S", "N"],
+        "confirmation": {
+            "yes": "Una vez más al ataque.",
+            "no": "¡Gracias por usar la calculadora!"
+        },
+        "result": "El resultado es: "
     },
-    "confirmations" : {
-        "yes" : "Once more into the breach.",
-        "no" : "Thanks for operating!"
+    "FR": {
+        "welcome": "Bienvenue dans la Calculatrice !",
+        "ask": {
+            "number": ["Quel est le premier nombre ?", "Quel est le deuxième nombre ?"],
+            "operation": "Quelle opération souhaitez-vous effectuer ?\n 1) Additionner 2) Soustraire 3) Multiplier 4) Diviser",
+            "repeat": "Effectuer une autre opération ? O / N"
+        },
+        "scold": {
+            "wrong_number": "Hmm.. Cela ne ressemble pas à un nombre valide.",
+            "wrong_operation": "Vous devez entrer 1, 2, 3 ou 4.",
+            "wrong_continue": "Vous devez entrer 'O' ou 'N'."
+        },
+        "letter": ["O", "N"],
+        "confirmation": {
+            "yes": "Encore une fois dans la brèche.",
+            "no": "Merci d'avoir utilisé la calculatrice !"
+        },
+        "result": "Le résultat est : "
+
+    },
+    "DE": {
+        "welcome": "Willkommen beim Rechner!",
+        "ask": {
+            "number": ["Was ist die erste Zahl?", "Was ist die zweite Zahl?"],
+            "operation": "Welche Operation möchten Sie ausführen?\n 1) Addieren 2) Subtrahieren 3) Multiplizieren 4) Dividieren",
+            "repeat": "Eine weitere Operation durchführen? J / N"
+        },
+        "scold": {
+            "wrong_number": "Hmm.. Das scheint keine gültige Zahl zu sein.",
+            "wrong_operation": "Sie müssen 1, 2, 3 oder 4 eingeben.",
+            "wrong_continue": "Sie müssen 'J' oder 'N' eingeben."
+        },
+        "letter": ["J", "N"],
+        "confirmation": {
+            "yes": "Noch einmal in die Bresche.",
+            "no": "Danke fürs Rechnen!"
+        },
+        "result": "Das Ergebnis ist: "
     }
 }
