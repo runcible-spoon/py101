@@ -1,10 +1,15 @@
+import json
+
+with open('calculator_messages.json', 'r') as file:
+    MESSAGES = json.load(file)
+
 def prompt(message):
     print(f"=>{message}")
 
-prompt('Welcome to Calculator!')
+prompt(MESSAGES["welcome"])
 
 while True:
-    prompt("What's the first number?")
+    prompt(MESSAGES["asks"]["numbers"][0])
     number1 = input()
 
     def invalid_number(number_str):
@@ -17,25 +22,24 @@ while True:
 
 
     while invalid_number(number1):
-        prompt("Hmm.. That doesn't look like a valid number.")
+        prompt(MESSAGES["scolds"]["wrong_number"])
         number1 = input()
 
-    prompt("What's the second number?")
+    prompt(MESSAGES["asks"]["numbers"][1])
     number2 = input()
 
 
     while invalid_number(number2):
-        prompt("Hmm.. That doesn't look like a valid number.")
+        prompt(MESSAGES["scolds"]["wrong_number"])
         number2 = input()
 
     prompt(f'{number1} {number2}')
-    prompt('''What operation would you like to perform?\n
-        1) Add 2) Subtract 3) Multiple 4) Divide''')
+    prompt(MESSAGES["asks"]["operations"])
     operation = input()
 
 
     while operation not in ['1', '2', '3', '4']:
-        prompt("You must enter 1, 2, 3, or 4.")
+        prompt(MESSAGES["scolds"]["wrong_operation"])
         operation = input()
 
 
@@ -51,20 +55,20 @@ while True:
             output = int(number1) / int(number2)
 
     # print the result to the terminal.
-    prompt(f"The result is: {output}")
+    prompt(f'The result is: {output}')
     
 
-    prompt('Perform another operation? Y / N')
+    prompt(MESSAGES["asks"]["repeat"])
     continue_choice = input()
 
     while continue_choice not in ['Y', 'N']:
-        prompt("You must enter 'Y' or 'N'.")
+        prompt(MESSAGES["scolds"]["wrong_continue"])
         continue_choice = input()
     
     match continue_choice:
         case 'Y':
-            prompt("Once more into the breach.")
+            prompt(MESSAGES["confirmations"]["yes"])
             continue
         case 'N':
-            prompt("Thanks for operating!")
+            prompt(MESSAGES["confirmations"]["no"])
             break

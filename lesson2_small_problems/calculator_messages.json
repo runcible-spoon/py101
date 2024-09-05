@@ -1,0 +1,17 @@
+{
+    "welcome" : "Welcome to Calculator!",
+    "asks" : {
+        "numbers" : ["What's the first number?", "What's the second number?"],
+        "operations" : "What operation would you like to perform?\n 1) Add 2) Subtract 3) Multiple 4) Divide",
+        "repeat" : "Perform another operation? Y / N"
+    },
+    "scolds" : {
+        "wrong_number" : "Hmm.. That doesn't look like a valid number.", 
+        "wrong_operation" : "You must enter 1, 2, 3, or 4.", 
+        "wrong_continue" : "You must enter 'Y' or 'N'."
+    },
+    "confirmations" : {
+        "yes" : "Once more into the breach.",
+        "no" : "Thanks for operating!"
+    }
+}
