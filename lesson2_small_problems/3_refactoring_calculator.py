@@ -35,6 +35,8 @@ while True:
         prompt(intl_message["scold"]["wrong_number"])
         number1 = input()
 
+    print(type(number1))
+
     prompt(intl_message["ask"]["number"][1])
     number2 = input()
 
