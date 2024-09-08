@@ -20,57 +20,72 @@ while True:
 
     loan_amount = float(loan_amount)
 
-
     # get interest rate
-    print("Please enter your ANNUAL PERCENTAGE RATE (APR): ___% ")
+    print("Please enter your ANNUAL PERCENTAGE RATE (APR): _% ")
     annual_percentage_rate = input()
 
     while invalid_input(annual_percentage_rate):
-        print("APR must be a number.")
+        print("Enter APR as a number, i.e. '5' for 5%.")
         annual_percentage_rate = input()
     
-    annual_percentage_rate = float(annual_percentage_rate)
+    annual_percentage_rate = float(annual_percentage_rate) / 100
 
 
     # calculate monthly interest from annual
     monthly_interest_rate = annual_percentage_rate / 12
 
+    # get loan term
+    print("Please enter your LOAN TERM in YEARS, MONTHS.")
 
-    # determine loan period
-    print("Is your loan duration represented in YEARS (Y) or MONTHS (M)? Years can be decimal.")
-    loan_period = input()
+    # get number of years
+    print("YEARS: \n(Enter a whole number. If less than a year, enter 0).")
+    loan_duration_years = input()
 
-    while loan_period not in ['Y', 'M']:
-        print("Must respond with Y for years, M for months.")
-        loan_period = input()
+    def invalid_years_input(years_input):
+        try: 
+            int(years_input)
+        except ValueError:
+            return True
 
+        return False
 
-    # get loan duration
-    print("Please enter your LOAN DURATION: ")
-    loan_duration = input()
-
-    while invalid_input(loan_duration):
-        print("Loan duration must be a number.")
-        loan_duration = input()
-
-    loan_duration = float(loan_duration)    
-
-    match loan_period:
-        case 'Y':
-            loan_duration_months = loan_duration * 12
-        case 'M':
-            loan_duration_months = loan_duration
- 
             
-    monthly_payment = loan_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** (- loan_duration_months)))
-    rounded_monthly_payment = round(monthly_payment, 2)
+    while invalid_years_input(loan_duration_years):
+        print("Loan duration YEARS must be a whole number.")
+        loan_duration_years = input()
 
-    print(f"Your monthly payment is ${rounded_monthly_payment}")
+    loan_duration_years = float(loan_duration_years)    
 
+    # get number of months
+    print("MONTHS: ")
+    loan_duration_months = input()
+
+    while invalid_input(loan_duration_months):
+        print("Loan duration MONTHS must be a number.")
+        loan_duration_months = input()
+
+    loan_duration_months = float(loan_duration_months)    
+
+    # get total loan term in months
+    loan_term = (loan_duration_years * 12) + loan_duration_months
+    
+    # calculate monthly payment
+    def calculate(loan_amount, monthly_interest_rate, loan_term):
+        try:
+            monthly_payment = round(loan_amount * (monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** (-loan_term))), 2)
+        except ZeroDivisionError:
+            monthly_payment = round(loan_amount / loan_term, 2)
+
+        return monthly_payment
+    
+
+    print(f"Your monthly payment is ${calculate(loan_amount, monthly_interest_rate, loan_term)}")
+
+    # ask to continue
     print("Another calculation? Y / N")
     continue_choice = input()
     
-    while continue_choice not in ['Y', 'N']:
+    while continue_choice not in ['Yes', 'Y', 'y', 'No', 'N', 'n']:
         print("Please enter Y or N.")
         continue_choice = input()
 
@@ -78,5 +93,5 @@ while True:
         case 'Y':
             continue
         case 'N':
-            print("Thank you! Good luck on your loan.") 
+            print("Thank you! Good luck with your loan.") 
             break
