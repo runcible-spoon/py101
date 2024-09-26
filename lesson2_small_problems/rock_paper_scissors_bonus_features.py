@@ -3,21 +3,36 @@ import random
 def prompt(message):
     print(f'==> {message}')
 
-VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+VALID_CHOICES = {
+    'r': 'rock',
+    'p': 'paper',
+    'sc': 'scissors',
+    'l': 'lizard', 
+    'sp': 'spock'
+}
+
 
 def get_player_choice():
-    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
+    prompt('Choose one: (r)ock, (p)aper, (sc)issors, (l)izard, (sp)ock')
     choice = input()
 
-    while choice not in VALID_CHOICES:
+    while not is_choice_valid(choice):
         prompt("That's not a valid choice.")
         choice = input()
+   
+    return VALID_CHOICES[choice]
 
-    return choice
+def is_choice_valid(choice):
+    if choice in VALID_CHOICES.keys():
+        return True
+    
+    return False
+
 
 def get_computer_choice():
-    computer_choice = random.choice(VALID_CHOICES)
+    computer_choice = random.choice(list(VALID_CHOICES.values()))
     return computer_choice
+
 
 def display_choices(player, computer):
     prompt(f"You chose {player}, computer chose {computer}")
@@ -52,7 +67,7 @@ def get_play_again_choice():
     prompt("Do you want to play again? (y/n)")
     answer = input().lower()
 
-    while answer and answer[0] not in ['y', 'n']:
+    while not answer or answer[0] not in ['y', 'n']:
         prompt("That's not a valid choice.")
         answer = input().lower()
 
