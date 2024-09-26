@@ -20,6 +20,7 @@ def get_player_choice():
         prompt("That's not a valid choice.")
         choice = input()
    
+   # Return the value to input's key
     return VALID_CHOICES[choice]
 
 def is_choice_valid(choice):
