@@ -11,7 +11,7 @@ SPOCK vaporizes ROCK, smashes SCISSORS
 User is prompted to enter a choice. Computer then randomly selects 
 from one of the five options, and a winner for the round is determined.
 
-User and computer play to best three out of five. 
+User and computer play to best three out of five rounds. 
 
 Ties count toward the turn total and a tie final result is possible. 
 '''
@@ -42,7 +42,7 @@ WINNING_COMBINATIONS = {
     'spock':    ['rock',        'scissors']
 }
 
-
+'''INPUTS'''
 def get_player_choice():
     prompt('Choose one: (r)ock, (p)aper, (sc)issors, (l)izard, (sp)ock')
     choice = input()
@@ -63,6 +63,8 @@ def get_computer_choice():
     computer_choice = random.choice(list(VALID_CHOICES.values()))
     return computer_choice
 
+
+'''ROUND OUTCOME'''
 def display_choices(player_choice, computer_choice):
     prompt(f"You chose {player_choice}. The computer chose {computer_choice}.")
 
@@ -95,6 +97,8 @@ def display_score(player_score, computer_score):
 def display_turns(turns):
     prompt(f"ROUND: {turns}/5")
 
+
+'''GAME OUTCOME'''
 def player_wins_game(player_score):
     return player_score >= 3
 
@@ -112,6 +116,8 @@ def display_winner(player_score, computer_score):
     else:
         prompt("Tie! Try again.")
 
+
+'''PLAY AGAIN'''
 def get_play_again_choice():
     '''
     After final score, ask if player wants to go again.
@@ -130,7 +136,8 @@ def get_play_again_choice():
             return False
 
 
-def main():
+'''MAIN'''
+def game():
     continue_game = True
 
     while continue_game is True:
@@ -173,4 +180,4 @@ def main():
 
     prompt("Thanks for playing!")
 
-main()
+game()
