@@ -42,7 +42,7 @@ WINNING_COMBINATIONS = {
     'spock':    ['rock',        'scissors']
 }
 
-'''INPUTS'''
+# INPUTS
 def get_player_choice():
     prompt('Choose one: (r)ock, (p)aper, (sc)issors, (l)izard, (sp)ock')
     choice = input()
@@ -64,7 +64,7 @@ def get_computer_choice():
     return computer_choice
 
 
-'''ROUND OUTCOME'''
+# ROUND OUTCOME
 def display_choices(player_choice, computer_choice):
     prompt(f"You chose {player_choice}. The computer chose {computer_choice}.")
 
@@ -98,7 +98,7 @@ def display_turns(turns):
     prompt(f"ROUND: {turns}/5")
 
 
-'''GAME OUTCOME'''
+# GAME OUTCOME
 def player_wins_game(player_score):
     return player_score >= 3
 
@@ -117,7 +117,7 @@ def display_winner(player_score, computer_score):
         prompt("Tie! Try again.")
 
 
-'''PLAY AGAIN'''
+# PLAY AGAIN?
 def get_play_again_choice():
     '''
     After final score, ask if player wants to go again.
@@ -136,7 +136,7 @@ def get_play_again_choice():
             return False
 
 
-'''MAIN'''
+# MAIN
 def game():
     continue_game = True
 
