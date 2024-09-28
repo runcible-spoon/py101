@@ -17,12 +17,27 @@ Ties count toward the turn total and a tie final result is possible.
 '''
 
 import random
+import os
 
 def prompt(message):
     '''
     Distinguish computer messages from user input in terminal.
     '''
     print(f'==> {message}')
+
+def display_welcome_message():
+    prompt("%====================================================%")
+    prompt("|  WELCOME TO ROCK, PAPER, SCISSORS, LIZARD, SPOCK!  |")
+    prompt("%====================================================%")
+
+    prompt('''
+                        RULES:
+            ROCK crushes SCISSORS, LIZARD
+            PAPER covers ROCK, disproves SPOCK
+            SCISSORS cut PAPER, LIZARD
+            LIZARD chews on PAPER, poisons SPOCK
+            SPOCK vaporizes ROCK, smashes SCISSORS
+            ''')
 
 # Valid user inputs
 VALID_CHOICES = {
@@ -42,14 +57,18 @@ WINNING_COMBINATIONS = {
     'spock':    ['rock',        'scissors']
 }
 
+# Constants
+TOTAL_ROUNDS = 5
+WINNING_SCORE = 3
+
 # INPUTS
 def get_player_choice():
     prompt('Choose one: (r)ock, (p)aper, (sc)issors, (l)izard, (sp)ock')
-    choice = input()
+    choice = input().lower()
 
     while not is_choice_valid(choice):
         prompt("That's not a valid choice.")
-        choice = input()
+        choice = input().lower()
 
     # Return the value that corresponds to user input's key
     return VALID_CHOICES[choice]
@@ -83,11 +102,10 @@ def adjust_score(player_choice, computer_choice, player_score, computer_score):
     '''
     Increment the score variables
     '''
-    if player_wins_round(player_choice, computer_choice):
+    player_win_outcome = player_wins_round(player_choice, computer_choice)
+    if player_win_outcome:
         player_score += 1
-    elif player_choice == computer_choice:
-        pass
-    else:
+    elif not player_win_outcome:
         computer_score += 1
     return player_score, computer_score
 
@@ -95,23 +113,32 @@ def display_score(player_score, computer_score):
     prompt(f"SCORE: You: {player_score} | Computer: {computer_score}")
 
 def display_turns(turns):
-    prompt(f"ROUND: {turns}/5")
+    prompt(f"ROUND: {turns}/{TOTAL_ROUNDS}")
 
 
 # GAME OUTCOME
-def player_wins_game(player_score):
-    return player_score >= 3
+def has_game_ended(player_score, computer_score, turns):
+    '''
+    Checks whether either agent has the minimum winning score,
+    and if no. of turns is less than or equal to max (5).
+    '''
+    return( not agent_wins_game(player_score)
+              and not agent_wins_game(computer_score)
+              and turns <= TOTAL_ROUNDS)
 
-def computer_wins_game(computer_score):
-    return computer_score >= 3
+def agent_wins_game(score):
+    '''
+    True if agent has won, False if not.
+    '''
+    return score >= WINNING_SCORE
 
 def display_winner(player_score, computer_score):
     '''
     Display game's final outcome.
     '''
-    if computer_wins_game(computer_score) or computer_score > player_score:
+    if agent_wins_game(computer_score) or computer_score > player_score:
         prompt("Computer won! Better luck next time.")
-    elif player_wins_game(player_score) or player_score > computer_score:
+    elif agent_wins_game(player_score) or player_score > computer_score:
         prompt("You won! Way to go!")
     else:
         prompt("Tie! Try again.")
@@ -139,30 +166,18 @@ def get_play_again_choice():
 # MAIN
 def game():
     continue_game = True
+    display_welcome_message()
 
-    while continue_game is True:
+    while continue_game:
         turns = 1
         player_score = 0
         computer_score = 0
-        prompt("%====================================================%")
-        prompt("|  WELCOME TO ROCK, PAPER, SCISSORS, LIZARD, SPOCK!  |")
-        prompt("%====================================================%")
+        
 
-        prompt('''
-                           RULES:
-               ROCK crushes SCISSORS, LIZARD
-               PAPER covers ROCK, disproves SPOCK
-               SCISSORS cut PAPER, LIZARD
-               LIZARD chews on PAPER, poisons SPOCK
-               SPOCK vaporizes ROCK, smashes SCISSORS
-               ''')
-
-        while(not player_wins_game(player_score)
-              and not computer_wins_game(computer_score)
-              and turns <= 5):
-
+        while(has_game_ended()):
             player_choice = get_player_choice()
             computer_choice = get_computer_choice()
+            
             display_choices(player_choice, computer_choice)
             display_round_outcome(player_choice, computer_choice)
 
@@ -177,6 +192,8 @@ def game():
 
         display_winner(player_score, computer_score)
         continue_game = get_play_again_choice()
+        
+        os.system('clear')
 
     prompt("Thanks for playing!")
 
