@@ -174,7 +174,7 @@ def game():
         computer_score = 0
         
 
-        while(has_game_ended()):
+        while(has_game_ended(player_score, computer_score, turns)):
             player_choice = get_player_choice()
             computer_choice = get_computer_choice()
             
